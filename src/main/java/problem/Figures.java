@@ -51,13 +51,32 @@ public class Figures {
             gl.glEnd();
         }
     }
-    public static void renderCircle(GL2 gl,Vector2 posA,double rad,boolean filt){
+    public static void renderCircle(GL2 gl,Vector2 posA,double r,boolean filt){
         if(filt==true) {
-            gl.glBegin(GL.GL_CIRCLES);
-
+            gl.glBegin(GL.GL_TRIANGLE_FAN);
+            int n=5000;
+            gl.glVertex2d(posA.x,posA.y);
+            gl.glVertex2d(posA.x+r,posA.y);
+            for(int i=1;i<n+1;i++){
+               gl.glVertex2d(posA.x+r-2*r*i/n,posA.y+Math.sqrt(r*r-(r-2*r*i/n)*(r-2*r*i/n)));
+            }
+            gl.glVertex2d(posA.x+r,posA.y);
+            for(int i=1;i<n+1;i++){
+                gl.glVertex2d(posA.x+r-2*r*i/n,posA.y-Math.sqrt(r*r-(r-2*r*i/n)*(r-2*r*i/n)));
+            }
             gl.glEnd();
         }else{
-
+            gl.glBegin(GL.GL_LINE_STRIP);
+            int n=5000;
+            gl.glVertex2d(posA.x+r,posA.y);
+            for(int i=1;i<n+1;i++){
+                gl.glVertex2d(posA.x+r-2*r*i/n,posA.y+Math.sqrt(r*r-(r-2*r*i/n)*(r-2*r*i/n)));
+            }
+            for(int i=1;i<n+1;i++){
+                gl.glVertex2d(posA.x-r+2*r*i/n,posA.y-Math.sqrt(r*r-(r-2*r*i/n)*(r-2*r*i/n)));
+            }
+            gl.glVertex2d(posA.x+r,posA.y);
+            gl.glEnd();
         }
     }
 }

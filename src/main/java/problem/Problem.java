@@ -134,6 +134,6 @@ public class Problem {
        // for (Point point : points) {
        //     point.render(gl);
        // }
-       Figures.renderQuad(gl,new Vector2(0.5,0.5),new Vector2(0.9,-0.7),new Vector2(0,-0.5),new Vector2(-0.2,-0.2),true);
+       Figures.renderCircle(gl,new Vector2(0.4,0.4),0.5,false);
     }
 }
