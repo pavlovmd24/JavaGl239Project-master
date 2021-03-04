@@ -134,6 +134,9 @@ public class Problem {
        // for (Point point : points) {
        //     point.render(gl);
        // }
-       Figures.renderCircle(gl,new Vector2(0.4,0.4),0.5,false);
+       Triangle t = new Triangle(0,0,0,0.5,Math.sqrt(3)/4,0.25);
+       if(t.regular()==true) {
+           t.render(gl);
+       }
     }
 }

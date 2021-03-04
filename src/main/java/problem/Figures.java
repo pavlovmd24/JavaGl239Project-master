@@ -33,6 +33,27 @@ public class Figures {
             gl.glEnd();
         }
     }
+    public static void renderRightTriangle(GL2 gl,Vector2 posA,Vector2 posB,Vector2 posC,boolean filt){
+        double q=Math.sqrt((posA.x-posB.x)*(posA.x-posB.x)+(posA.y-posB.y)*(posA.y-posB.y));
+        double w=Math.sqrt((posC.x-posB.x)*(posC.x-posB.x)+(posC.y-posB.y)*(posC.y-posB.y));
+        double e=Math.sqrt((posA.x-posC.x)*(posA.x-posC.x)+(posA.y-posC.y)*(posA.y-posC.y));
+        if((Math.abs(q-w)<0.001)&&(Math.abs(q-e)<0.001)&&(Math.abs(e-w)<0.001)) {
+            if (filt == true) {
+                gl.glBegin(GL.GL_TRIANGLES);
+                gl.glVertex2d(posA.x, posA.y);
+                gl.glVertex2d(posB.x, posB.y);
+                gl.glVertex2d(posC.x, posC.y);
+                gl.glEnd();
+            } else {
+                gl.glBegin(GL.GL_LINE_STRIP);
+                gl.glVertex2d(posA.x, posA.y);
+                gl.glVertex2d(posB.x, posB.y);
+                gl.glVertex2d(posC.x, posC.y);
+                gl.glVertex2d(posA.x, posA.y);
+                gl.glEnd();
+            }
+        }
+    }
     public static void renderQuad(GL2 gl,Vector2 posA,Vector2 posB,Vector2 posC,Vector2 posD,boolean filt){
         if(filt==true) {
             gl.glBegin(GL2.GL_QUADS);
