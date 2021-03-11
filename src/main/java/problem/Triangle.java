@@ -1,5 +1,7 @@
 package problem;
 import javax.media.opengl.GL2;
+import java.util.Random;
+
 public class Triangle {
     double ax;
     double ay;
@@ -11,8 +13,17 @@ public class Triangle {
         Vector2 v1 =new Vector2(ax,ay);
         Vector2 v2 =new Vector2(bx,by);
         Vector2 v3 =new Vector2(cx,cy);
-        Figures.renderTriangle(gl,v1,v2,v3,true);
+        Figures.renderTriangle(gl,v1,v2,v3,false);
     }
+    public Triangle(Point a, Point b, Point c){
+        this.ax=a.x;
+        this.ay=a.y;
+        this.bx=b.x;
+        this.by=b.y;
+        this.cx=c.x;
+        this.cy=c.y;
+    }
+
     public Triangle(double ax,double ay,double bx,double by, double cx, double cy){
         this.ax=ax;
         this.ay=ay;
@@ -39,5 +50,14 @@ public class Triangle {
         }else{
             return false;
         }
+    }
+    public static Triangle getRandomTriangle(){
+        double x1= Math.random()*2-1;
+        double x2= Math.random()*2-1;
+        double x3= Math.random()*2-1;
+        double y1= Math.random()*2-1;
+        double y2= Math.random()*2-1;
+        double y3= Math.random()*2-1;
+        return new Triangle(x1,y1,x2,y2,x3,y3);
     }
 }
