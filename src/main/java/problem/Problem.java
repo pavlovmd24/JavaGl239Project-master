@@ -13,13 +13,15 @@ public class Problem {
      * текст задачи
      */
     public static final String PROBLEM_TEXT = "ПОСТАНОВКА ЗАДАЧИ:\n" +
-            "Заданы два множества точек в пространстве.\n" +
-            "Требуется построить пересечения и разность этих множеств";
+            "Дано множество точек на плоскости.\n" +
+            "Определить среди них множество точек\n" +
+            "наибольшего размера такое, что каждая точка этого множества является вершиной\n" +
+            "равностороннего треугольника, вершины которого принадлежат этому множеству.";
 
     /**
      * заголовок окна
      */
-    public static final String PROBLEM_CAPTION = "Итоговый проект ученика 10-7 Иванова Ивана";
+    public static final String PROBLEM_CAPTION = "Итоговый проект ученика 10-1 Павлова Михаила";
 
     /**
      * путь к файлу
@@ -60,22 +62,35 @@ public class Problem {
         int i=0;
         int j=0;
         int q=0;
+        int[] mas = new int[10000];
         for(Point p1 : points ) {
-            i++;
             for (Point p2 : points) {
-                j++;
                 if(j>i) {
                     for (Point p3 : points) {
-                        q++;
                         if(q>j) {
                             Triangle t = new Triangle(p1, p2, p3);
                             if (t.regular()) {
                                 triangles.add(t);
                             }
+                            if(mas[i]==0){
+                                mas[i]++;
+                                points.add(p1);
+                            }
+                            if(mas[j]==0){
+                                mas[j]++;
+                                points.add(p2);
+                            }
+                            if(mas[q]==0){
+                                mas[q]++;
+                                points.add(p3);
+                            }
                         }
+                        q++;
                     }
                 }
+                j++;
             }
+            i++;
         }
     }
 
@@ -107,7 +122,7 @@ public class Problem {
         try {
             PrintWriter out = new PrintWriter(new FileWriter(FILE_NAME));
             for (Point point : points) {
-                out.printf("%.2f %.2f %d\n", point.x, point.y);
+                out.printf("%.2f %.2f\n", point.x, point.y);
             }
             out.close();
         } catch (IOException ex) {
