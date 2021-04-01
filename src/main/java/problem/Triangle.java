@@ -45,7 +45,7 @@ public class Triangle {
         double q=Math.sqrt(ABx*ABx+ABy*ABy);
         double w=Math.sqrt(BCx*BCx+BCy*BCy);
         double e=Math.sqrt(ACx*ACx+ACy*ACy);
-        if((Math.abs(q-w)<0.001)&&(Math.abs(q-e)<0.001)&&(Math.abs(e-w)<0.001)) {
+        if((Math.abs(q-w)<0.01)&&(Math.abs(q-e)<0.01)&&(Math.abs(e-w)<0.01)) {
             return true;
         }else{
             return false;
@@ -59,5 +59,9 @@ public class Triangle {
         double y2= Math.random()*2-1;
         double y3= Math.random()*2-1;
         return new Triangle(x1,y1,x2,y2,x3,y3);
+    }
+    public  Point PointA(){
+        Point p = new Point(ax, ay);
+        return p;
     }
 }

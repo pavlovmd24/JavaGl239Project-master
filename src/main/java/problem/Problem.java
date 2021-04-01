@@ -33,6 +33,8 @@ public class Problem {
      */
     private ArrayList<Point> points;
     private ArrayList<Triangle> triangles;
+    private ArrayList<Triangle> resultTriangles;
+    private ArrayList<Point> resultPoints;
 
     /**
      * Конструктор класса задачи
@@ -40,6 +42,8 @@ public class Problem {
     public Problem() {
         points = new ArrayList<>();
         triangles = new ArrayList<>();
+        resultTriangles = new ArrayList<>();
+        resultPoints = new ArrayList<>();
     }
 
     /**
@@ -57,12 +61,13 @@ public class Problem {
      * Решить задачу
      */
     public void solve() {
-        triangles.clear();
+
+        resultTriangles.clear();
+        resultPoints.clear();
         // перебираем пары точек
         int i=0;
         int j=0;
         int q=0;
-        int[] mas = new int[10000];
         for(Point p1 : points ) {
             for (Point p2 : points) {
                 if(j>i) {
@@ -70,19 +75,10 @@ public class Problem {
                         if(q>j) {
                             Triangle t = new Triangle(p1, p2, p3);
                             if (t.regular()) {
-                                triangles.add(t);
-                            }
-                            if(mas[i]==0){
-                                mas[i]++;
-                                points.add(p1);
-                            }
-                            if(mas[j]==0){
-                                mas[j]++;
-                                points.add(p2);
-                            }
-                            if(mas[q]==0){
-                                mas[q]++;
-                                points.add(p3);
+                                resultTriangles.add(t);
+                                resultPoints.add(p1);
+                                resultPoints.add(p2);
+                                resultPoints.add(p3);
                             }
                         }
                         q++;
@@ -98,6 +94,8 @@ public class Problem {
      * Загрузить задачу из файла
      */
     public void loadFromFile() {
+        resultTriangles.clear();
+        resultPoints.clear();
         points.clear();
         try {
             File file = new File(FILE_NAME);
@@ -139,8 +137,6 @@ public class Problem {
         for (int i = 0; i < n; i++) {
             Point p = Point.getRandomPoint();
             points.add(p);
-            Triangle r = Triangle.getRandomTriangle();
-            triangles.add(r);
         }
     }
 
@@ -150,6 +146,8 @@ public class Problem {
     public void clear() {
         points.clear();
         triangles.clear();
+        resultTriangles.clear();
+        resultPoints.clear();
     }
 
     /**
@@ -163,8 +161,12 @@ public class Problem {
             point.render(gl);
         }
         gl.glColor3d(0.3, 0.1, 0.5);
-        for (Triangle triangle : triangles) {
+        for (Triangle triangle : resultTriangles) {
             triangle.render(gl);
+        }
+        gl.glColor3d(0.3, 0.1, 0.5);
+        for (Point point : resultPoints) {
+            point.render(gl);
         }
 //      Triangle t = Triangle.getRandomTriangle();
 //      t.render(gl);
