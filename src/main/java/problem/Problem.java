@@ -65,28 +65,21 @@ public class Problem {
         resultTriangles.clear();
         resultPoints.clear();
         // перебираем пары точек
-        int i=0;
-        int j=0;
-        int q=0;
-        for(Point p1 : points ) {
-            for (Point p2 : points) {
-                if(j>i) {
-                    for (Point p3 : points) {
-                        if(q>j) {
-                            Triangle t = new Triangle(p1, p2, p3);
-                            if (t.regular()) {
-                                resultTriangles.add(t);
-                                resultPoints.add(p1);
-                                resultPoints.add(p2);
-                                resultPoints.add(p3);
-                            }
-                        }
-                        q++;
+        for (int i = 0; i < points.size(); i++) {
+            for (int j = i + 1; j < points.size(); j++) {
+                for (int k = j + 1; k < points.size(); k++) {
+                    Point p1 = points.get(i);
+                    Point p2 = points.get(j);
+                    Point p3 = points.get(k);
+                    Triangle t = new Triangle(p1, p2, p3);
+                    if (t.regular()) {
+                        resultTriangles.add(t);
+                        resultPoints.add(p1);
+                        resultPoints.add(p2);
+                        resultPoints.add(p3);
                     }
                 }
-                j++;
             }
-            i++;
         }
     }
 
@@ -160,6 +153,7 @@ public class Problem {
         for (Point point : points) {
             point.render(gl);
         }
+
         gl.glColor3d(0.3, 0.1, 0.5);
         for (Triangle triangle : resultTriangles) {
             triangle.render(gl);
@@ -168,7 +162,5 @@ public class Problem {
         for (Point point : resultPoints) {
             point.render(gl);
         }
-//      Triangle t = Triangle.getRandomTriangle();
-//      t.render(gl);
     }
 }

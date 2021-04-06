@@ -64,4 +64,12 @@ public class Triangle {
         Point p = new Point(ax, ay);
         return p;
     }
+    public  Point PointB(){
+        Point p = new Point(bx, by);
+        return p;
+    }
+    public  Point PointC(){
+        Point p = new Point(cx, cy);
+        return p;
+    }
 }
