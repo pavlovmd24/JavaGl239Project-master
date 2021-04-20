@@ -64,7 +64,7 @@ public class Problem {
 
         resultTriangles.clear();
         resultPoints.clear();
-        // перебираем пары точек
+        // перебираем тройки точек
         for (int i = 0; i < points.size(); i++) {
             for (int j = i + 1; j < points.size(); j++) {
                 for (int k = j + 1; k < points.size(); k++) {
@@ -72,7 +72,9 @@ public class Problem {
                     Point p2 = points.get(j);
                     Point p3 = points.get(k);
                     Triangle t = new Triangle(p1, p2, p3);
+                    //для  каждого треугольника проверяем является ли он правильным
                     if (t.regular()) {
+                        //если треугольник правильный заносим его и его вершины в ответ
                         resultTriangles.add(t);
                         resultPoints.add(p1);
                         resultPoints.add(p2);
